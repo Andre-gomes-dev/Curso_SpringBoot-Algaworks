@@ -1,16 +1,16 @@
-package com.algaworks.algafood.domain.service;
+package com.geekstore.estudo.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
-import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
-import com.algaworks.algafood.domain.model.Cidade;
-import com.algaworks.algafood.domain.model.Estado;
-import com.algaworks.algafood.domain.repository.CidadeRepository;
-import com.algaworks.algafood.domain.repository.EstadoRepository;
+import com.geekstore.estudo.domain.exception.EntidadeEmUsoException;
+import com.geekstore.estudo.domain.exception.EntidadeNaoEncontradaException;
+import com.geekstore.estudo.domain.model.Cidade;
+import com.geekstore.estudo.domain.model.Estado;
+import com.geekstore.estudo.domain.repository.CidadeRepository;
+import com.geekstore.estudo.domain.repository.EstadoRepository;
 
 @Service
 public class CadastroCidadeService {
