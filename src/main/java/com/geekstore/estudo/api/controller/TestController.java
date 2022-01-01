@@ -13,6 +13,8 @@ import com.geekstore.estudo.domain.model.Cozinha;
 import com.geekstore.estudo.domain.model.Restaurante;
 import com.geekstore.estudo.domain.repository.CozinhaRepository;
 import com.geekstore.estudo.domain.repository.RestauranteRepository;
+import com.geekstore.estudo.infrastructure.repository.spec.RestauranteComFreteGratisSpec;
+import com.geekstore.estudo.infrastructure.repository.spec.RestauranteComNomeSemelhanteSpec;
 
 @RestController
 @RequestMapping("/teste")
@@ -71,10 +73,19 @@ public class TestController {
 	}
 	
 	
-	
 	@GetMapping("/restaurantes/count-por-cozinha")
 	public int restaurantesCountPorCozinha(
 			Long cozinhaId) {
 		return restauranteRepository.countByCozinhaId(cozinhaId);
 	}
+
+	@GetMapping("/restaurantes/com-frete-gratis")
+	public List<Restaurante> restaurantesComFreteGratis(
+			String  nome) {
+		var comFreteGratis = new RestauranteComFreteGratisSpec();
+		var comNomeSemelhante = new RestauranteComNomeSemelhanteSpec(nome);
+		
+		return restauranteRepository.findAll(comFreteGratis.and(comNomeSemelhante));
+	}
+	
 }
