@@ -13,8 +13,6 @@ import com.geekstore.estudo.domain.model.Cozinha;
 import com.geekstore.estudo.domain.model.Restaurante;
 import com.geekstore.estudo.domain.repository.CozinhaRepository;
 import com.geekstore.estudo.domain.repository.RestauranteRepository;
-import com.geekstore.estudo.infrastructure.repository.spec.RestauranteComFreteGratisSpec;
-import com.geekstore.estudo.infrastructure.repository.spec.RestauranteComNomeSemelhanteSpec;
 
 @RestController
 @RequestMapping("/teste")
@@ -39,6 +37,11 @@ public class TestController {
 	@GetMapping("/cozinhas/exists")
 	public boolean cozinhaExists(String nome) {
 		return cozinhaRepository.existsByNome(nome);
+	}
+	
+	@GetMapping("/cozinhas/primeiro")
+	public Optional<Cozinha> CozinhaPrimeiro() {
+		return cozinhaRepository.buscarPrimeiro();
 	}
 	
 	@GetMapping("/restaurantes/por-taxa-frete")
@@ -82,10 +85,14 @@ public class TestController {
 	@GetMapping("/restaurantes/com-frete-gratis")
 	public List<Restaurante> restaurantesComFreteGratis(
 			String  nome) {
-		var comFreteGratis = new RestauranteComFreteGratisSpec();
-		var comNomeSemelhante = new RestauranteComNomeSemelhanteSpec(nome);
-		
-		return restauranteRepository.findAll(comFreteGratis.and(comNomeSemelhante));
+	
+		return restauranteRepository.findComFreteGratis(nome);
+	}
+
+
+	@GetMapping("/restaurantes/primeiro")
+	public Optional<Restaurante> restaurantePrimeiro() {
+		return restauranteRepository.buscarPrimeiro();
 	}
 	
 }
